@@ -51,20 +51,12 @@ float USV::get_lat_accel(float steering, float speed) const
     return accel;
 }
 
-// returns the heel angle due to turning in radians
-float USV::get_heel_angle(float steering, float speed) const
-{
-    float accel = get_lat_accel(steering, speed);
-    float heel = asinf(accel/GRAVITY_MSS * heeling_arm/metacentric_height); // radians
-    return heel;
-}
-
 // simulate basic waves / swell
 void USV::update_wave(float delta_time)
 {
     const float wave_heading = sitl->wave.direction;
     const float wave_speed = sitl->wave.speed;
-    const float wave_lenght = sitl->wave.length;
+    const float wave_length = sitl->wave.length;
     const float wave_amp = sitl->wave.amp;
 
     // apply rate propositional to error between boat angle and water angle
@@ -84,8 +76,8 @@ void USV::update_wave(float delta_time)
     const float boat_speed = velocity_ef.x * sinf(radians(wave_heading)) + velocity_ef.y * cosf(radians(wave_heading));
 
     // update the wave phase
-    const float aprarent_wave_distance = (wave_speed - boat_speed) * delta_time;
-    const float apparent_wave_phase_change = (aprarent_wave_distance / wave_lenght) * M_2PI;
+    const float apparent_wave_distance = (wave_speed - boat_speed) * delta_time;
+    const float apparent_wave_phase_change = (apparent_wave_distance / wave_length) * M_2PI;
 
     wave_phase += apparent_wave_phase_change;
     wave_phase = wrap_2PI(wave_phase);
@@ -93,7 +85,7 @@ void USV::update_wave(float delta_time)
     // calculate the angles at this phase on the wave
     // use basic sine wave, dy/dx of sine = cosine
     // atan( cosine ) = wave angle
-    const float wave_slope = (wave_amp * 0.5f) * (M_2PI / wave_lenght) * cosf(wave_phase);
+    const float wave_slope = (wave_amp * 0.5f) * (M_2PI / wave_length) * cosf(wave_phase);
     const float wave_angle = atanf(wave_slope);
 
     // convert wave angle to vehicle frame
