@@ -368,7 +368,7 @@ class VehicleInfo(object):
             "usv": {
                 "waf_target": "bin/ardurover",
                 "default_params_filename": ["default_params/rover.parm",
-                                            "../Frame_params/boogie-board-boat.param"],
+                                            "default_params/usv.parm"],
             },
         },
     },
