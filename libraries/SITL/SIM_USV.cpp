@@ -40,9 +40,6 @@ USV::USV(const char *frame_str) :
 // return yaw rate in deg/sec given a steering input (in the range -1 to +1) and speed in m/s
 float USV::get_yaw_rate(float steering, float speed) const
 {
-    if (is_zero(steering) || is_zero(speed)) {
-        return 0;
-    }
     return steering * turn_rate;
 }
 
@@ -52,6 +49,14 @@ float USV::get_lat_accel(float steering, float speed) const
     float yaw_rate = get_yaw_rate(steering, speed);
     float accel = radians(yaw_rate) * speed;
     return accel;
+}
+
+// returns the heel angle due to turning in radians
+float USV::get_heel_angle(float steering, float speed) const
+{
+    float accel = get_lat_accel(steering, speed);
+    float heel = asinf(accel/GRAVITY_MSS * heeling_arm/metacentric_height); // radians
+    return heel;
 }
 
 // simulate basic waves / swell
@@ -75,7 +80,7 @@ void USV::update_wave(float delta_time)
         return;
     }
 
-    // calculate the sailboat speed in the direction of the wave
+    // calculate the boat speed in the direction of the wave
     const float boat_speed = velocity_ef.x * sinf(radians(wave_heading)) + velocity_ef.y * cosf(radians(wave_heading));
 
     // update the wave phase

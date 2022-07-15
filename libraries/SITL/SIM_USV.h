@@ -48,22 +48,27 @@ private:
     // return lateral acceleration in m/s/s given a steering input (in the range -1 to +1) and speed in m/s
     float get_lat_accel(float steering, float speed) const;
 
+    // returns the heel angle due to turning in radians
+    float get_heel_angle(float steering, float speed) const;
+
     // simulate waves and swell
     void update_wave(float delta_time);
 
-    float turning_circle;       // vehicle minimum turning circle diameter in meters
-    float turn_rate;            // vehicle maximum turn rate in degrees/second
+    float turning_circle;            // vehicle minimum turning circle diameter in meters
+    float turn_rate;                 // vehicle maximum turn rate in degrees/second
 
     // thrust curve based on Blue Robotics T200 thruster data at 16V
     // PWM values                     1100   1140   1180   1220   1260   1300   1340   1380   1420   1460  1500  1540  1580  1620  1660  1700  1740  1780  1820  1860  1900
     const float thrust_curve[21] = {-4.07f,-3.66f,-2.99f,-2.45f,-1.94f,-1.44f,-1.02f,-0.65f,-0.32f,-0.07f,0.00f,0.08f,0.40f,0.82f,1.28f,1.82f,2.43f,3.11f,3.82f,4.65f,5.25f}; // kgf
-
+    
+    float metacentric_height = 1.0f; // distance (GM) between center of gravity and metacentre (GM)
+    float heeling_arm = 0.0f;        // perpendicular distance (BG) between the center of gravity and center of buoyancy
     const float mass = 6.0f;
 
-    Vector3f velocity_ef_water; // m/s
-    Vector3f wave_gyro;         // rad/s
-    float wave_heave;           // m/s/s
-    float wave_phase;           // rads
+    Vector3f velocity_ef_water;      // m/s
+    Vector3f wave_gyro;              // rad/s
+    float wave_heave;                // m/s/s
+    float wave_phase;                // rads
 };
 
 } // namespace SITL
