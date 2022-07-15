@@ -37,6 +37,7 @@
 #include <SITL/SIM_JSON.h>
 #include <SITL/SIM_Blimp.h>
 #include <AP_Filesystem/AP_Filesystem.h>
+#include <SITL/SIM_USV.h>
 
 #include <signal.h>
 #include <stdio.h>
@@ -174,6 +175,7 @@ static const struct {
     { "webots",             Webots::create },
     { "JSON",               JSON::create },
     { "blimp",              Blimp::create },
+    { "usv",                USV::create },
 };
 
 void SITL_State::_set_signal_handlers(void) const

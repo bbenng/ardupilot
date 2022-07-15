@@ -365,6 +365,11 @@ class VehicleInfo(object):
             "calibration": {
                 "extra_mavlink_cmds": "module load sitl_calibration;",
             },
+            "usv": {
+                "waf_target": "bin/ardurover",
+                "default_params_filename": ["default_params/rover.parm",
+                                            "../Frame_params/boogie-board-boat.param"],
+            },
         },
     },
     "ArduSub": {
