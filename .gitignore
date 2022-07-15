@@ -91,7 +91,7 @@ index.html
 logs/
 mav.log
 mav.log.raw
-mav.parm
+mav*.parm
 mk/PX4/ROMFS/default.parm
 module.mk
 serialsent.raw
