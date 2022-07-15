@@ -1,6 +1,9 @@
 !/bin/bash
 
-# Usage: ./swarminit.sh [count]
+# Instructions:
+#     1. Change the AP_Path and QGC_Path to your ardupilot repository's Rover directory and your QGroundControl Application Image path
+#     2. Next, save the modified script under the name "swarminit.sh" (Note: do NOT overwrite the default script)
+# Usage: swarminit.sh [count]
 
 # Variable declaration
 location='PandanReservoir'
