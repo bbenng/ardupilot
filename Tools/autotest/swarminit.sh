@@ -6,7 +6,7 @@
 location='PandanReservoir'
 AP_PATH='/home/ra-lwj-apollo/ardupilot/Rover'
 QGC_PATH='/home/ra-lwj-apollo/Documents/QGroundControl.AppImage'
-count="$1"
+count="${1:-1}"
 
 echo "Initializing $count USV instances in SITL..."
 for (( i=1; i<=$count; i++ ))
