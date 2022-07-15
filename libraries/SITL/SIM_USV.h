@@ -58,6 +58,10 @@ private:
     // PWM values                     1100   1140   1180   1220   1260   1300   1340   1380   1420   1460  1500  1540  1580  1620  1660  1700  1740  1780  1820  1860  1900
     const float thrust_curve[21] = {-4.07f,-3.66f,-2.99f,-2.45f,-1.94f,-1.44f,-1.02f,-0.65f,-0.32f,-0.07f,0.00f,0.08f,0.40f,0.82f,1.28f,1.82f,2.43f,3.11f,3.82f,4.65f,5.25f}; // kgf
     
+    // Max and min PWM values
+    int min_PWM = 1100;
+    int max_PWM = 1900;
+
     const float mass = 6.0f;
 
     Vector3f velocity_ef_water;      // m/s
