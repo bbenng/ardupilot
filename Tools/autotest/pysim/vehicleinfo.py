@@ -370,16 +370,6 @@ class VehicleInfo(object):
                 "default_params_filename": ["default_params/rover.parm",
                                             "default_params/usv.parm"],
             },
-                    "usv-1": {
-                "waf_target": "bin/ardurover",
-                "default_params_filename": ["default_params/rover.parm",
-                                            "default_params/usv-1.parm"],
-            },
-            "usv-2": {
-                "waf_target": "bin/ardurover",
-                "default_params_filename": ["default_params/rover.parm",
-                                            "default_params/usv-2.parm"],
-            },
         },
     },
     "ArduSub": {
