@@ -1,12 +1,14 @@
 #!/bin/bash
 
+# Usage: ./rosswarm.sh [count]
 # Note: Ensure that the offboard ROS package has been built successfully.
 # https://github.com/alvintps/offboard
+# Offboard ROS package: https://github.com/alvintps/offboard
 
 # Variable declaration
-count=2
+count="$1"
 
-echo "Initializing multiple USV instances in ROS..."
+echo "Initializing $count USV instances in ROS..."
 for (( i=1; i<=$count; i++ ))
 do
     echo "Starting Vehicle $i..."

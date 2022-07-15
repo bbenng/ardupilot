@@ -1,12 +1,14 @@
 !/bin/bash
 
+# Usage: ./swarminit.sh [count]
+
 # Variable declaration
 location='PandanReservoir'
 AP_PATH='/home/ra-lwj-apollo/ardupilot/Rover'
 QGC_PATH='/home/ra-lwj-apollo/Documents/QGroundControl.AppImage'
-count=2
+count="$1"
 
-echo "Initializing multiple USV instances in SITL..."
+echo "Initializing $count USV instances in SITL..."
 for (( i=1; i<=$count; i++ ))
 do
     echo "Starting Vehicle $i..."
