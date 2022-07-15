@@ -116,24 +116,11 @@ void USV::update(const struct sitl_input &input)
 {
     float steering, throttle;
 
-    // update wind
-    update_wind(input);
-
     // the usv uses skid steering mode, i.e. the steering and throttle values are used for motor1 and motor2
     float motor1 = 2*((input.servos[0]-1000)/1000.0f - 0.5f);
     float motor2 = 2*((input.servos[2]-1000)/1000.0f - 0.5f);
     steering = motor1 - motor2;
     throttle = 0.5*(motor1 + motor2);
-
-    // calculate apparent wind in earth-frame (this is the direction the wind is coming from)
-    // Note than the SITL wind direction is defined as the direction the wind is travelling to
-    // This is accounted for in these calculations
-    Vector3f wind_apparent_ef = wind_ef + velocity_ef;
-    const float wind_apparent_speed = safe_sqrt(sq(wind_apparent_ef.x)+sq(wind_apparent_ef.y));
-
-    // set RPM and airspeed from wind speed, allows to test RPM and Airspeed wind vane back end in SITL
-    rpm[0] = wind_apparent_speed;
-    airspeed_pitot = wind_apparent_speed;
 
     // how much time has passed?
     float delta_time = frame_time_us * 1.0e-6f;
